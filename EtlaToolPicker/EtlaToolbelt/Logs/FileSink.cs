@@ -6,9 +6,11 @@
 //	To make changes or additions, rerun the ETLA Toolbelt Wizard after editing T4 templates if required
 // --------------------------------------------------------------------------------------------------
 
+using EtlaToolPicker.EtlaToolbelt.Logs;
+using EtlaToolPicker.EtlaToolbelt;
 using System.Diagnostics;
 
-namespace EtlaToolbeltPicker.EtlaToolbelt.Logs;
+namespace EtlaToolPicker.EtlaToolbelt.Logs;
 
 /// <summary>The implementation of a Log Sink which sends log messages to a file</summary>
 public class FileSink : AbstractLogSink

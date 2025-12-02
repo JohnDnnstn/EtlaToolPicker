@@ -1,7 +1,7 @@
-﻿using EtlaToolbeltPicker.EtlaToolbelt.CmdLines;
-using EtlaToolbeltPicker.EtlaToolbelt.Infrastructure;
+﻿using EtlaToolPicker.EtlaToolbelt.CmdLines;
+using EtlaToolPicker.EtlaToolbelt.Infrastructure;
 
-namespace EtlaToolbeltPicker.EtlaToolbelt
+namespace EtlaToolPicker.EtlaToolbelt
 {
     /// <summary>An API for the implementation of code to analyse the command line which initiated this application
     /// Usage:

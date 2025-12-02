@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace EtlaToolbeltPicker.EtlaToolbelt.CmdLines;
+namespace EtlaToolPicker.EtlaToolbelt.CmdLines;
 
 /// <summary>The default implementation of the EtlaToolbelt CmdLine API
 /// Usage:

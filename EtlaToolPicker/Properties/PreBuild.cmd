@@ -77,7 +77,8 @@ EXIT /B
 
 @ECHO Generating %outFile%
 
-@ECHO using System.Reflection;>%outfile%
+@ECHO using %myNamespace%.Properties;>%outfile%
+@ECHO using System.Reflection;>>%outfile%
 @ECHO using System.Runtime.InteropServices;>>%outfile%
 @ECHO using System.Runtime.Versioning;>>%outfile%
 
@@ -91,10 +92,10 @@ ECHO // General Information about an assembly.>>%outfile%
 @ECHO [assembly: AssemblyTitle("")]>>%outfile%
 @ECHO [assembly: AssemblyDescription("")]>>%outfile%
 @ECHO [assembly: AssemblyConfiguration("")]>>%outfile%
-@ECHO [assembly: AssemblyCompany(%myNamespace%.AssemblyDefinitions.CompanyFullName)] >>%outfile%
-@ECHO [assembly: AssemblyProduct(%myNamespace%.AssemblyDefinitions.ApplicationName)] >>%outfile%
-if [%ext%] == [.cs] @ECHO [assembly: AssemblyCopyright(%myNamespace%.AssemblyDefinitions.Copyright+"%year%")] >>%outfile%
-if NOT [%ext%] == [.cs] @ECHO [assembly: AssemblyCopyright(%myNamespace%.AssemblyDefinitions.Copyright+"$WCNOW=%%Y$")]>>%outfile%
+@ECHO [assembly: AssemblyCompany(AssemblyDefinitions.CompanyFullName)] >>%outfile%
+@ECHO [assembly: AssemblyProduct(AssemblyDefinitions.ApplicationName)] >>%outfile%
+if [%ext%] == [.cs] @ECHO [assembly: AssemblyCopyright(AssemblyDefinitions.Copyright+"%year%")] >>%outfile%
+if NOT [%ext%] == [.cs] @ECHO [assembly: AssemblyCopyright(AssemblyDefinitions.Copyright+"$WCNOW=%%Y$")]>>%outfile%
 @ECHO [assembly: AssemblyTrademark("")]>>%outfile%
 @ECHO [assembly: AssemblyCulture("")]>>%outfile%
 
@@ -115,11 +116,11 @@ if NOT [%ext%] == [.cs] @ECHO [assembly: AssemblyCopyright(%myNamespace%.Assembl
 @ECHO // * AssemblyFileVersion: Displayed in windows explorer as File Version - Use the last place to ensure all source is checked in and up-to-date>>%outfile%
 @ECHO // * AssemblyInformationalVersion: Displayed in windows explorer as Product Version - Use third place to hold git revision>>%outfile%
 @ECHO //>>%outfile%
-@ECHO [assembly: AssemblyVersion(%myNamespace%.AssemblyDefinitions.Version)]>>%outfile%
-if [%ext%] == [.cs] @ECHO [assembly: AssemblyFileVersion(%myNamespace%.AssemblyDefinitions.Version+".0.12")]>>%outfile%
-if [%ext%] == [.cs] @ECHO [assembly: AssemblyInformationalVersion(%myNamespace%.AssemblyDefinitions.Version+".0")]>>%outfile%
-if NOT [%ext%] == [.cs] @ECHO [assembly: AssemblyFileVersion(%myNamespace%.AssemblyDefinitions.Version+".$WCLOGCOUNT$.$WCUNVER?1:0$$WCMODS?2:0$")]>>%outfile%
-if NOT [%ext%] == [.cs] @ECHO [assembly: AssemblyInformationalVersion(%myNamespace%.AssemblyDefinitions.Version+".$WCLOGCOUNT$+$WCREV$")]>>%outfile%
+@ECHO [assembly: AssemblyVersion(AssemblyDefinitions.Version)]>>%outfile%
+if [%ext%] == [.cs] @ECHO [assembly: AssemblyFileVersion(AssemblyDefinitions.Version+".0.12")]>>%outfile%
+if [%ext%] == [.cs] @ECHO [assembly: AssemblyInformationalVersion(AssemblyDefinitions.Version+".0")]>>%outfile%
+if NOT [%ext%] == [.cs] @ECHO [assembly: AssemblyFileVersion(AssemblyDefinitions.Version+".$WCLOGCOUNT$.$WCUNVER?1:0$$WCMODS?2:0$")]>>%outfile%
+if NOT [%ext%] == [.cs] @ECHO [assembly: AssemblyInformationalVersion(AssemblyDefinitions.Version+".$WCLOGCOUNT$+$WCREV$")]>>%outfile%
 
 @ECHO.>>%outfile%
 @ECHO // Specify we will only run on Windows to save all the warnings>>%outfile%
@@ -137,8 +138,7 @@ if NOT [%ext%] == [.cs] @ECHO [assembly: AssemblyInformationalVersion(%myNamespa
  
 @SET outFile=%assemblyDefinitions%
 
-@ECHO #pragma warning disable IDE0130 // Namespace does not match folder structure>%outfile%
-@ECHO namespace %myNamespace%;>>%outfile%
+@ECHO namespace %myNamespace%.Properties;>>%outfile%
 @ECHO.>>%outfile%
 @ECHO public static class AssemblyDefinitions>>%outfile%
 @ECHO {>>%outfile%
@@ -147,7 +147,7 @@ if NOT [%ext%] == [.cs] @ECHO [assembly: AssemblyInformationalVersion(%myNamespa
 @ECHO   public const string Version = MajorVersion + "." + MinorVersion;>>%outfile%
 @ECHO.>>%outfile%
 @ECHO   public const string ApplicationName = "ETLA Toolbox Picker";>>%outfile%
-@ECHO   public const string StartYear = "2025";>>%outfile%
+@ECHO   public const string StartYear = "2019";>>%outfile%
 @ECHO   public const string Company = "ETLA Services Ltd";>>%outfile%
 @ECHO   public const string CompanyFullName = "ETLA Services Ltd";>>%outfile%
 @ECHO   public const string Copyright = Company + " " + StartYear + "-";>>%outfile%

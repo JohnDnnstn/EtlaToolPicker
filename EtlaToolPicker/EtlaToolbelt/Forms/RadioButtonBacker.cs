@@ -1,4 +1,4 @@
-﻿namespace EtlaToolbeltPicker.EtlaToolbelt.Forms;
+﻿namespace EtlaToolPicker.EtlaToolbelt.Forms;
 
 public class ControlBacker
 {

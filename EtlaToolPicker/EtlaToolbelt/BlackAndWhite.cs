@@ -5,7 +5,7 @@
 // At 17/07/2023 13:47:44
 //--------------------------------------------------------------------------------
 
-namespace EtlaToolbeltPicker.EtlaToolbelt;
+namespace EtlaToolPicker.EtlaToolbelt;
 
 /// <summary>Extension classes that allow slighty more readable tests for whether strings have printable characters</summary>
 public static class BlackAndWhite

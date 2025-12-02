@@ -7,7 +7,7 @@
 // </auto-generated>
 // --------------------------------------------------------------------------------------------------
 
-namespace EtlaToolbeltPicker.EtlaToolbelt.Logs;
+namespace EtlaToolPicker.EtlaToolbelt.Logs;
 
 /// <summary>Defines the various elements of a log message (not just its text), e.g. when the message was created</summary>
 public class LogMessage

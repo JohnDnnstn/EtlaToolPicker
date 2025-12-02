@@ -8,7 +8,7 @@
 
 using System.Diagnostics;
 
-namespace EtlaToolbeltPicker.EtlaToolbelt.Contexts;
+namespace EtlaToolPicker.EtlaToolbelt.Contexts;
 
 /// <summary>This is the default implementation of the EtlaToolbelt Context API
 /// Env - Implemented by looking at the environmental variable "NETCORE_ENVIRONMENT" with an "UNKNOWN" fallback

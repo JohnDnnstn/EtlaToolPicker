@@ -7,7 +7,7 @@
 // --------------------------------------------------------------------------------------------------
 
 
-namespace EtlaToolbeltPicker.EtlaToolbelt.Infrastructure;
+namespace EtlaToolPicker.EtlaToolbelt.Infrastructure;
 
 /// <summary>
 /// The philosophy behind the ETLA Toolbelt is as follows:	

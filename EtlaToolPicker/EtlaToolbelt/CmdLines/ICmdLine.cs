@@ -1,4 +1,4 @@
-﻿namespace EtlaToolbeltPicker.EtlaToolbelt.CmdLines;
+﻿namespace EtlaToolPicker.EtlaToolbelt.CmdLines;
 
 /// <summary>This defines the properties and methods that relate to understanding the command line used to initiate the application
 /// Note to implementors:

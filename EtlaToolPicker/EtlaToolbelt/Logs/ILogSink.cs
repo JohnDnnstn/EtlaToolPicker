@@ -8,7 +8,7 @@
 // </auto-generated>
 // --------------------------------------------------------------------------------------------------
 
-namespace EtlaToolbeltPicker.EtlaToolbelt.Logs;
+namespace EtlaToolPicker.EtlaToolbelt.Logs;
 
 /// <summary>>This defines the properties and methods that targets for log messages must provide and expose
 /// Note to implementors:

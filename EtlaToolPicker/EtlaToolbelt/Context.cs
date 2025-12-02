@@ -1,5 +1,5 @@
-﻿using EtlaToolbeltPicker.EtlaToolbelt.Contexts;
-using EtlaToolbeltPicker.EtlaToolbelt.Infrastructure;
+﻿using EtlaToolPicker.EtlaToolbelt.Contexts;
+using EtlaToolPicker.EtlaToolbelt.Infrastructure;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 //	To make changes or additions, rerun the ETLA Toolbelt Wizard after editing T4 templates if required
 // --------------------------------------------------------------------------------------------------
 
-namespace EtlaToolbeltPicker.EtlaToolbelt;
+namespace EtlaToolPicker.EtlaToolbelt;
 
 /// <summary>An API for the implementation of code to get application context information
 /// The precise algorithms for getting this information depend on the current implementation

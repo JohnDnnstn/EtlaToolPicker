@@ -1,4 +1,4 @@
-﻿namespace EtlaToolbeltPicker.EtlaToolbelt.Forms;
+﻿namespace EtlaToolPicker.EtlaToolbelt.Forms;
 
 /// <summary>This interface specifies that an object is backing data for a Form
 /// On the form being loaded, the form's controls are initialised to the contents of backing properties

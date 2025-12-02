@@ -1,4 +1,4 @@
-﻿namespace EtlaToolbeltPicker.EtlaToolbelt.Forms;
+﻿namespace EtlaToolPicker.EtlaToolbelt.Forms;
 
 /// <summary>This class sets up a relationship between the Controls of a Form and a Backing object
 /// On the form being loaded, the form's controls are initialised to the contents of backing properties

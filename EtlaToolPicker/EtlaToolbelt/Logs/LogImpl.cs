@@ -6,8 +6,7 @@
 //	To make changes or additions, rerun the ETLA Toolbelt Wizard after editing T4 templates if required
 // --------------------------------------------------------------------------------------------------
 
-
-namespace EtlaToolbeltPicker.EtlaToolbelt.Logs;
+namespace EtlaToolPicker.EtlaToolbelt.Logs;
 
 /// <summary>This is the default implementation of the logging interface
 /// </summary>

@@ -1,3 +1,4 @@
+using EtlaToolPicker.Properties;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
@@ -11,9 +12,9 @@ using System.Runtime.Versioning;
 [assembly: AssemblyTitle("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany(EtlaToolPicker.AssemblyDefinitions.CompanyFullName)] 
-[assembly: AssemblyProduct(EtlaToolPicker.AssemblyDefinitions.ApplicationName)] 
-[assembly: AssemblyCopyright(EtlaToolPicker.AssemblyDefinitions.Copyright+"$WCNOW=%Y$")]
+[assembly: AssemblyCompany(AssemblyDefinitions.CompanyFullName)] 
+[assembly: AssemblyProduct(AssemblyDefinitions.ApplicationName)] 
+[assembly: AssemblyCopyright(AssemblyDefinitions.Copyright+"$WCNOW=%Y$")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -24,16 +25,16 @@ using System.Runtime.Versioning;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 //
-[assembly: Guid("1f91af42-427a-4071-9aaa-67a194e164d3")]
+[assembly: Guid("a6fcd985-0275-4d98-a36a-1aa2b453eb2a")]
 
 // Version numbers
 // * AssemblyVersion: Used to define directory for user.config and by CLR for any referencing assemblies
 // * AssemblyFileVersion: Displayed in windows explorer as File Version - Use the last place to ensure all source is checked in and up-to-date
 // * AssemblyInformationalVersion: Displayed in windows explorer as Product Version - Use third place to hold git revision
 //
-[assembly: AssemblyVersion(EtlaToolPicker.AssemblyDefinitions.Version)]
-[assembly: AssemblyFileVersion(EtlaToolPicker.AssemblyDefinitions.Version+".$WCLOGCOUNT$.$WCUNVER?1:0$$WCMODS?2:0$")]
-[assembly: AssemblyInformationalVersion(EtlaToolPicker.AssemblyDefinitions.Version+".$WCLOGCOUNT$+$WCREV$")]
+[assembly: AssemblyVersion(AssemblyDefinitions.Version)]
+[assembly: AssemblyFileVersion(AssemblyDefinitions.Version+".$WCLOGCOUNT$.$WCUNVER?1:0$$WCMODS?2:0$")]
+[assembly: AssemblyInformationalVersion(AssemblyDefinitions.Version+".$WCLOGCOUNT$+$WCREV$")]
 
 // Specify we will only run on Windows to save all the warnings
 //

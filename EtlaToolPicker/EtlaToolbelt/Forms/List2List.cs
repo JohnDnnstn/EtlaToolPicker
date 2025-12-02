@@ -8,7 +8,7 @@ using System.ComponentModel;
 //------------------------------------------------------------------------------------------
 
 
-namespace EtlaToolbeltPicker.EtlaToolbelt.Forms;
+namespace EtlaToolPicker.EtlaToolbelt.Forms;
 
 public partial class List2List : UserControl
 {

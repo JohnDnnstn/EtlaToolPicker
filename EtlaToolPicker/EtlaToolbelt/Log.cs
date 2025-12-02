@@ -1,5 +1,5 @@
-﻿using EtlaToolbeltPicker.EtlaToolbelt.Infrastructure;
-using EtlaToolbeltPicker.EtlaToolbelt.Logs;
+﻿using EtlaToolPicker.EtlaToolbelt.Infrastructure;
+using EtlaToolPicker.EtlaToolbelt.Logs;
 using System.Runtime.CompilerServices;
 
 // --------------------------------------------------------------------------------------------------
@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 //	To make changes or additions, rerun the ETLA Toolbelt Wizard after editing T4 templates if required
 // --------------------------------------------------------------------------------------------------
 
-namespace EtlaToolbeltPicker.EtlaToolbelt;
+namespace EtlaToolPicker.EtlaToolbelt;
 
 /// <summary>Provides logging-related utilties where the caller does not have to know anything about the actual implementation
 /// The methods should never throw.

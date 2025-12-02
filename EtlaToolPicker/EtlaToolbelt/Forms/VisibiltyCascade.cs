@@ -1,4 +1,4 @@
-﻿namespace EtlaToolbeltPicker.EtlaToolbelt.Forms;
+﻿namespace EtlaToolPicker.EtlaToolbelt.Forms;
 
 /// <summary>The visibility of a control can depend on whether a checkbox is ticked or a radio button is chosen
 /// Generally we also want to change the Enabled status of the control at the same time.

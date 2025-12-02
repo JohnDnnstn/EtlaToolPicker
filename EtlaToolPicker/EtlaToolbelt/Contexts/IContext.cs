@@ -6,7 +6,7 @@
 //	To make changes or additions, rerun the ETLA Toolbelt Wizard after editing T4 templates if required
 // --------------------------------------------------------------------------------------------------
 
-namespace EtlaToolbeltPicker.EtlaToolbelt.Contexts;
+namespace EtlaToolPicker.EtlaToolbelt.Contexts;
 
 /// <summary>This defines the properties and methods that relate to the running context of an application
 /// Note to implementors:

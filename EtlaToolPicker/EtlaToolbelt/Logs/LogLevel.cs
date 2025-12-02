@@ -5,8 +5,8 @@
 //	Changes to this file will be lost if the code is regenerated.
 //	To make changes or additions, rerun the ETLA Toolbelt Wizard after editing T4 templates if required
 // --------------------------------------------------------------------------------------------------
-// ReSharper disable InconsistentNaming
-namespace EtlaToolbeltPicker.EtlaToolbelt.Logs;
+
+namespace EtlaToolPicker.EtlaToolbelt.Logs;
 
 /// <summary>The flag-based enum which specifies different types of log message
 /// </summary>

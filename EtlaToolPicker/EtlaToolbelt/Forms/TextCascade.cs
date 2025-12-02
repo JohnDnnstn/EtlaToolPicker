@@ -1,4 +1,4 @@
-﻿namespace EtlaToolbeltPicker.EtlaToolbelt.Forms;
+﻿namespace EtlaToolPicker.EtlaToolbelt.Forms;
 
 /// <summary>This class deals with the situation where a text box may depend on the values of one other text box
 /// When the source box changes, this change should normally cascade to the target text box 
