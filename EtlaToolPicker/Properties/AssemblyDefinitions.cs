@@ -6,7 +6,7 @@ public static class AssemblyDefinitions
   public const string MinorVersion = "1";
   public const string Version = MajorVersion + "." + MinorVersion;
 
-  public const string ApplicationName = "ETLA Toolbox Picker";
+  public const string ApplicationName = "ETLA Tool Picker";
   public const string StartYear = "2019";
   public const string Company = "ETLA Services Ltd";
   public const string CompanyFullName = "ETLA Services Ltd";

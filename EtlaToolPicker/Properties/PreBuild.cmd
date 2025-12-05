@@ -14,6 +14,7 @@
 
 SET thisDir=%~dp0
 SET solutionDir=%~1
+
 SET assemblyDefinitions="%thisDir%AssemblyDefinitions.cs"
 SET assembly_cs="%thisDir%AssemblyInfo.cs"
 SET assembly_gitwcrev="%thisDir%AssemblyInfo.gitwcrev"
@@ -55,7 +56,7 @@ GOTO ifAssumptionsWrong
 @FOR /f %%i IN ('"powershell (New-Guid).ToString()"') DO SET guid=%%i
 @FOR /f %%i IN ('powershell Split-Path %solutionDir% -leaf') DO SET myNamespace=%%i
 
-CALL :generateAssemblyDefinitions 
+@IF NOT EXIST %assemblyDefinitions% CALL :generateAssemblyDefinitions 
 @IF NOT EXIST %assembly_cs%         CALL :generateAssemblyInfo %assembly_cs%
 @IF NOT EXIST %assembly_gitwcrev%   CALL :generateAssemblyInfo %assembly_gitwcrev%
 
@@ -146,7 +147,7 @@ if NOT [%ext%] == [.cs] @ECHO [assembly: AssemblyInformationalVersion(AssemblyDe
 @ECHO   public const string MinorVersion = "1";>>%outfile%
 @ECHO   public const string Version = MajorVersion + "." + MinorVersion;>>%outfile%
 @ECHO.>>%outfile%
-@ECHO   public const string ApplicationName = "ETLA Toolbox Picker";>>%outfile%
+@ECHO   public const string ApplicationName = "TBC";>>%outfile%
 @ECHO   public const string StartYear = "2019";>>%outfile%
 @ECHO   public const string Company = "ETLA Services Ltd";>>%outfile%
 @ECHO   public const string CompanyFullName = "ETLA Services Ltd";>>%outfile%

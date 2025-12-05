@@ -30,15 +30,16 @@ public static class BlackAndWhite
     /// <returns>True if the candidate is null or empty or contains only white space</returns>
     public static bool IsWhite([NotNullWhen(false)] this string? candidate) => string.IsNullOrWhiteSpace(candidate);
 
-    /// <summary>If the supplied string is black then it is returned, otherwise the fallback is returned
+    /// <summary> Returns either the candidate, or the fallback if the candidate is white (i.e. is null or has no non-white-space characters)
     /// Note: 
-    ///     This guarantees the returned string is not null 
-    ///     But it dies not guarantee that the returned string is balck since the fallback can be white 
+    /// The fallback cannot be null but can be white
     /// </summary>
-    /// <param name="str">The string to check</param>
-    /// <param name="fallback">The fallback string to return if the string to be checked is white</param>
-    /// <returns>The initial string if it is black; or the fallback string ithe initial string is white</returns>
-    // This guarantees a non-null string is returned but does not guarantee that it will be Black
-    public static string IfWhite(this string? str, string fallback) => str.IsBlack() ? str : fallback;
+    /// <param name="candidate"></param>
+    /// <param name="fallback"></param>
+    /// <returns>The candidate, or the fallback if the candidate is white</returns>
+    public static string IfWhite(this string? candidate, string fallback) 
+    { 
+        return candidate.IsBlack() ? candidate : fallback; 
+    }
 
 }
