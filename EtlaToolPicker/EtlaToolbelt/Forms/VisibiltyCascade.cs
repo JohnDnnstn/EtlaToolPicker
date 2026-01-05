@@ -10,12 +10,14 @@
 public class VisibiltyCascade
 {
     protected Control Target { get; set; }
+    private readonly bool first = true;
 
     public VisibiltyCascade(CheckBox sourceCheckBox, Control target)
     {
         sourceCheckBox.CheckedChanged += SourceCheckBox_CheckedChanged;
         Target = target;
         SourceCheckBox_CheckedChanged(sourceCheckBox, EventArgs.Empty);
+        first = false;
     }
 
     public VisibiltyCascade(RadioButton sourceRadioButton, Control target)
@@ -23,16 +25,16 @@ public class VisibiltyCascade
         sourceRadioButton.CheckedChanged += SourceRadioButton_CheckedChanged;
         Target = target;
         SourceRadioButton_CheckedChanged(sourceRadioButton, EventArgs.Empty);
+        first = false;
     }
 
     private void SourceCheckBox_CheckedChanged(object? sender, EventArgs e)
     {
-        if (sender is CheckBox checkBox) { Target.Visible = Target.Enabled = checkBox.Checked && checkBox.Visible; }
+        if (sender is CheckBox checkBox) { Target.Visible = Target.Enabled = checkBox.Checked && (checkBox.Visible || first); }
     }
 
     private void SourceRadioButton_CheckedChanged(object? sender, EventArgs e)
     {
-        if (sender is RadioButton radioButton) { Target.Visible = Target.Enabled = radioButton.Checked && radioButton.Visible; }
+        if (sender is RadioButton radioButton) { Target.Visible = Target.Enabled = radioButton.Checked && (radioButton.Visible|| first); }
     }
-
 }

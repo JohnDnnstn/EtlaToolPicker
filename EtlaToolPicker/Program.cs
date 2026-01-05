@@ -1,6 +1,8 @@
+using EtlaToolPicker.BackingData;
+
 namespace EtlaToolPicker;
 
-internal static class Program
+public static class Program
 {
     /// <summary>
     ///  The main entry point for the application.
@@ -12,6 +14,16 @@ internal static class Program
         // see https://aka.ms/applicationconfiguration.
 
         ApplicationConfiguration.Initialize();
-        Application.Run(new TopLevel());
+
+        var data = new TopLevelData
+        {
+            TargetDirectory = "C:/Projects/Tests/PickerTest",
+            TargetNamespace = "PickerTest",
+            HasBlackAndWhite = true,
+            Next = TopLevelData.AllTopLevelData[2]
+        };
+        Application.Run(new TopLevelForm(data));
     }
+
+    public enum ZeroToThree { ZERO, ONE, TWO, THREE};
 }
