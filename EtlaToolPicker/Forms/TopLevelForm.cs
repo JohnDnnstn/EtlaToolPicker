@@ -56,13 +56,22 @@ namespace EtlaToolPicker
         {
             TrySave();
             bool ok = GenerateToolbelt.Generate(Data);
-            Console.WriteLine("OK = {ok}");
+            Console.WriteLine($"OK = {ok}");
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
             bool ok = TrySave();
-            Console.WriteLine("OK = {ok}");
+            Console.WriteLine($"OK = {ok}");
+        }
+
+        private void BtnScript_Click(object sender, EventArgs e)
+        {
+            List<string?> list = ["1234567891123456789212345678931234567894a", "1234567891123456789212345678931234567894b", null, "1234567891123456789212345678931234567894c"];
+            var gen = new GenerateScript();
+            var temp = gen.Generate(list);
+            Console.WriteLine(temp);
+
         }
     }
 }

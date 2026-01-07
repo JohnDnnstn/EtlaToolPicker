@@ -63,6 +63,7 @@
             RdoZero = new RadioButton();
             CmbZero = new ComboBox();
             CmbSomeString = new ComboBox();
+            BtnScript = new Button();
             GrpFascias.SuspendLayout();
             GrpAssemblyInfo.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -414,11 +415,22 @@
             CmbSomeString.Size = new Size(111, 23);
             CmbSomeString.TabIndex = 22;
             // 
+            // BtnScript
+            // 
+            BtnScript.Location = new Point(522, 414);
+            BtnScript.Name = "BtnScript";
+            BtnScript.Size = new Size(72, 24);
+            BtnScript.TabIndex = 23;
+            BtnScript.Text = "Script";
+            BtnScript.UseVisualStyleBackColor = true;
+            BtnScript.Click += BtnScript_Click;
+            // 
             // TopLevelForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(BtnScript);
             Controls.Add(CmbSomeString);
             Controls.Add(CmbZero);
             Controls.Add(groupBox1);
@@ -487,5 +499,6 @@
         private RadioButton RdoZero;
         private ComboBox CmbZero;
         private ComboBox CmbSomeString;
+        private Button BtnScript;
     }
 }
