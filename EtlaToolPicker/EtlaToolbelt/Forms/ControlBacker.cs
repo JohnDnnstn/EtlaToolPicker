@@ -19,16 +19,12 @@ public class ControlBacker<T>() : AbstractControlBacker
         BackingPropertyName = backingPropertyName;
     }
 
-    /// <summary>Sets the Control's property with the value currently in the backing data object's property
+    /// <summary>Tries to set the Control's property with the value currently in the backing data object's property
     /// <see cref="ObjectPropertyExtensions"/> for the mechanism for getting and setting properties of objects by name
     /// </summary>
     /// <param name="data">The backing data object</param>
-    public virtual void Load(IBackingData data)
-    {
-        var val = data.GetPropertyValue(BackingPropertyName);
-        Ctrl.SetPropertyValue(CtrlPropertyName, val);
-    }
-
+    /// <param name="msg">An error message if the method failed</param>
+    /// <returns><c>true</c> if the method succeeded; <c>false</c> otherwise</returns>
     public override bool TryLoad(IBackingData data, out string msg)
     {
         bool ok = data.TryGetPropertyValue(BackingPropertyName, out T? val, out msg);
@@ -50,16 +46,12 @@ public class ControlBacker<T>() : AbstractControlBacker
         return ok;
     }
 
-    /// <summary>Sets the BackingData's property with the value currently in the Control's object's property
+    /// <summary>Tries to set the BackingData's property with the value currently in the Control object's property
     /// <see cref="ObjectPropertyExtensions"/> for the mechanism for getting and setting properties of objects by name
     /// </summary>
     /// <param name="data">The backing data object</param>
-    public virtual void Save(IBackingData data)
-    {
-        var val = Ctrl.GetPropertyValue(CtrlPropertyName);
-        data.SetPropertyValue(BackingPropertyName, val);
-    }
-
+    /// <param name="msg">An error message if the method failed</param>
+    /// <returns><c>true</c> if the method succeeded; <c>false</c> otherwise</returns>
     public override bool TrySave(IBackingData data, out string msg)
     {
         bool ok = Ctrl.TryGetPropertyValue<T>(CtrlPropertyName, out T? val, out msg);
@@ -88,12 +80,6 @@ public class RadioButtonBacker<E>(RadioButton rdoButton, string backingPropertyN
 {
     protected E? Val { get; set; } = val;
 
-    public override void Load(IBackingData data)
-    {
-        var val = data.GetPropertyValue(BackingPropertyName);
-        ((RadioButton)Ctrl).Checked = val is E e && e.Equals(Val);
-    }
-
     public override Boolean TryLoad(IBackingData data, out String msg)
     {
         bool ok = data.TryGetPropertyValue<E>(BackingPropertyName, out E? val, out msg);
@@ -107,11 +93,6 @@ public class RadioButtonBacker<E>(RadioButton rdoButton, string backingPropertyN
 
         ((RadioButton)Ctrl).Checked = val is E e && e.Equals(Val);
         return true;
-    }
-
-    public override void Save(IBackingData data)
-    {
-        if (((RadioButton)Ctrl).Checked) { data.SetPropertyValue(BackingPropertyName, Val); }
     }
 
     public override bool TrySave(IBackingData data, out String msg)
@@ -214,17 +195,4 @@ public class ComboBoxBacker<T> : ControlBacker<T>
 
         return true;
     }
-
-    public override void Save(IBackingData data)
-    {
-        var val = Ctrl.GetPropertyValue(CtrlPropertyName);
-        if (val is T tVal)
-        {
-            data.SetPropertyValue(BackingPropertyName, tVal);
-        }
-    }
 }
-
-//public class ComboBoxBacker<string> : ComboBoxBacker<T>
-//{ 
-//}

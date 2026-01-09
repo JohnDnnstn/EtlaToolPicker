@@ -64,6 +64,7 @@
             CmbZero = new ComboBox();
             CmbSomeString = new ComboBox();
             BtnScript = new Button();
+            list2List1 = new EtlaToolPicker.EtlaToolbelt.Forms.List2List();
             GrpFascias.SuspendLayout();
             GrpAssemblyInfo.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -295,7 +296,7 @@
             GrpAssemblyInfo.Controls.Add(label3);
             GrpAssemblyInfo.Location = new Point(359, 147);
             GrpAssemblyInfo.Name = "GrpAssemblyInfo";
-            GrpAssemblyInfo.Size = new Size(429, 124);
+            GrpAssemblyInfo.Size = new Size(429, 99);
             GrpAssemblyInfo.TabIndex = 18;
             GrpAssemblyInfo.TabStop = false;
             GrpAssemblyInfo.Text = "AssemblyInfo";
@@ -402,9 +403,9 @@
             // CmbZero
             // 
             CmbZero.FormattingEnabled = true;
-            CmbZero.Location = new Point(442, 314);
+            CmbZero.Location = new Point(12, 356);
             CmbZero.Name = "CmbZero";
-            CmbZero.Size = new Size(340, 23);
+            CmbZero.Size = new Size(111, 23);
             CmbZero.TabIndex = 21;
             // 
             // CmbSomeString
@@ -425,11 +426,19 @@
             BtnScript.UseVisualStyleBackColor = true;
             BtnScript.Click += BtnScript_Click;
             // 
+            // list2List1
+            // 
+            list2List1.Location = new Point(359, 252);
+            list2List1.Name = "list2List1";
+            list2List1.Size = new Size(423, 160);
+            list2List1.TabIndex = 24;
+            // 
             // TopLevelForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(list2List1);
             Controls.Add(BtnScript);
             Controls.Add(CmbSomeString);
             Controls.Add(CmbZero);
@@ -500,5 +509,6 @@
         private ComboBox CmbZero;
         private ComboBox CmbSomeString;
         private Button BtnScript;
+        private EtlaToolbelt.Forms.List2List list2List1;
     }
 }

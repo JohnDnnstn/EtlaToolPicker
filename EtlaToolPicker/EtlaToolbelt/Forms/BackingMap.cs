@@ -13,6 +13,11 @@ public class BackingMap(IBackingData data)
 
     #region Add methods
 
+    /// <summary>Adds a relationship between a control and its backing data.  
+    /// This version is for custom controls which declare their own ControlBacker</summary>
+    /// <param name="ctrlBacker">The control backer for a custom control to try and load data into the control and save it from the control</param>
+    protected void Add<T>(ControlBacker<T> ctrlBacker) => ControlBackers.Add(ctrlBacker);
+
     /// <summary>Adds a relationship between a control and its backing data</summary>
     /// <param name="ctrl">The control</param>
     /// <param name="ctrlPropertyName">The property of the control set at load and saved at close</param>

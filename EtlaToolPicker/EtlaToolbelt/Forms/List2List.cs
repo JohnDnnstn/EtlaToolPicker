@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics;
 
 //------------------------------------------------------------------------------------------
 // This file was generated from the EtlaTool.Wizards vsn:1.0 template
@@ -70,8 +71,8 @@ public partial class List2List : UserControl
 
     private List<FormatInfo> _Formats { get; init; } = [];
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public bool Initialised { get; set; } = false;
+    //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    //public bool Initialised { get; set; } = false;
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public bool IsValid { get; set; } = true;
@@ -361,6 +362,51 @@ public static class ListBoxExtensions
             answer.Add(item);
         }
         return answer;
+    }
+}
+
+public class List2ListBacker : ControlBacker<IEnumerable>
+{
+    protected string DataSourcePropertyName { get; set; }
+    protected string DataDestinationPropertyName { get; set; }
+    public List2ListBacker(List2List ctrl, string dataSourcePropertyName, string dataDestinationPropertyName)
+        : base(ctrl, nameof(ctrl.ChosenItems), dataDestinationPropertyName)
+    { 
+        DataSourcePropertyName = dataSourcePropertyName;
+        DataDestinationPropertyName = dataDestinationPropertyName;
+    }
+
+    public override bool TryLoad(IBackingData data, out string msg)
+    {
+        if (Ctrl is List2List list2list)
+        {
+            var source = data.GetPropertyValue(DataSourcePropertyName);
+            if (source is not null and IEnumerable sourceEnumerable)
+            {
+                list2list.InitialiseSource(sourceEnumerable);
+                return base.TryLoad(data, out msg);
+            }
+            else
+            {
+                msg = $"Internal error: Failed to load List2List, source '{DataSourcePropertyName}' was not an IEnumerable";
+            }
+        }
+        else
+        {
+            msg = $"Internal error: control {Ctrl.Name} is not a List2List control";
+        }
+        return false;
+    }
+
+    public override bool TrySave(IBackingData data, out string msg) => base.TrySave(data, out msg);
+}
+
+public static class List2ListBackingMapExtensions
+{
+    public static void Add(this BackingMap backingMap, List2List ctrl, string dataSourcePropertyName, string dataDestinationPropertyName)
+    {
+        ControlBacker<IEnumerable> list2listBacker = new List2ListBacker(ctrl, dataSourcePropertyName, dataDestinationPropertyName);
+        backingMap.Add(list2listBacker);
     }
 }
 
