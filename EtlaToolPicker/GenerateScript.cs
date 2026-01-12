@@ -17,18 +17,18 @@ public class GenerateScript : Script
         public override string ToString() => Name;
     }
 
-    internal string Generate(List<string> letters)
+    internal string Generate(List<string?> letters)
     {
         List<Col> cols = [];
         foreach (var letter in letters)
         {
-            cols.Add(new Col(letter));
+            if (letter != null) { cols.Add(new Col(letter)); }
         }
 
         Scr("Hello world", false);
         Scr("{", 1);
         Scr("SELECT",1);
-        PrettyJoin(letters, ", ", maxLine: 120, itemPrefix: "table678.");
+        PrettyJoin(cols, ", ", maxLine: 120, itemPrefix: "table678.");
         Scr("FROM Table1;",-1);
         Scr();
         Scr("SELECT",1);

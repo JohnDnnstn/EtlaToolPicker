@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.ComponentModel;
-using System.Diagnostics;
 
 //------------------------------------------------------------------------------------------
 // This file was generated from the EtlaTool.Wizards vsn:1.0 template
@@ -69,8 +68,6 @@ public partial class List2List : UserControl
 
     #endregion
 
-    private List<FormatInfo> _Formats { get; init; } = [];
-
     //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     //public bool Initialised { get; set; } = false;
 
@@ -78,22 +75,22 @@ public partial class List2List : UserControl
     public bool IsValid { get; set; } = true;
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public IEnumerable ChosenItems { get => GetChosenObjects(); set => InitialiseDestination(value); }
+    public List<object> ChosenItems { get => GetDestinationList(); set => InitialiseDestination(value); }
 
     public List2List()
     {
         InitializeComponent();
     }
 
-    public void Initialise(IEnumerable source, IEnumerable destination)
+    public void Initialise(List<object> source, List<object> destination)
     {
         InitialiseSource(source);
         InitialiseDestination(destination);
     }
 
-    public void InitialiseSource(IEnumerable source, bool broadcastEvent = true)
+    public void InitialiseSource(List<object> source, bool broadcastEvent = true)
     {
-        var oldSrc = LstSource.ToStringList();
+        var oldSrc = GetSourceList();
         LstSource.Items.Clear();
 
         foreach (var srcItem in source)
@@ -101,16 +98,16 @@ public partial class List2List : UserControl
             if (srcItem != null) { _ = LstSource.Items.Add(srcItem); }
         }
 
-        if (broadcastEvent && !oldSrc.SequenceEqual(LstSource.ToStringList()))
+        if (broadcastEvent && !oldSrc.SequenceEqual(GetSourceList()))
         {
             BroadcastListChangedEvent(new EventArgs());
         }
     }
 
-    public void InitialiseDestination(IEnumerable destination, bool throwIfNotInSource = true)
+    public void InitialiseDestination(List<object> destination, bool broadcastMissingElement = true)
     {
         IsValid = true;
-        var oldDest = LstDestination.ToStringList();
+        var oldDest = GetDestinationList();
         LstDestination.Items.Clear();
         if (destination != null)
         {
@@ -126,30 +123,40 @@ public partial class List2List : UserControl
                     else
                     {
                         IsValid = false;
-                        if (throwIfNotInSource)
+                        if (broadcastMissingElement)
                         {
                             string name = destItem?.ToString() ?? "UNKNOWN";
                             BroadcastSourceListInitWithMissingElement(name);
-                            //throw new Exception($"Destination item {destItem} was not in the source list");
                         }
                     }
                 }
             }
         }
-        if (!oldDest.SequenceEqual(LstDestination.ToStringList()))
+        if (!oldDest.SequenceEqual(GetDestinationList()))
         {
             BroadcastListChangedEvent(new EventArgs());
         }
     }
 
-    /// <summary>Used when the user has already chosen but the underlying set of options has changed as it keeps the choices where possible
-    /// 
-    /// </summary>
+    /// <summary>Used when the user has already chosen but the underlying set of options has changed as it keeps the choices where possible</summary>
     /// <param name="throwIfNotInSource"></param>
-    public void ReinitialiseDestination(bool throwIfNotInSource = false)
+    public void ReinitialiseDestination(bool broadcastMissingElement = false)
     {
-        var newDest = LstDestination.ToObjectList();
-        InitialiseDestination(newDest, throwIfNotInSource);
+        List<object> newDest = GetDestinationList();
+        InitialiseDestination(newDest, broadcastMissingElement);
+    }
+
+    #region Formatting
+    private List<FormatInfo> _Formats { get; init; } = [];
+
+
+    protected class FormatInfo
+    {
+        public HashSet<string?> Items { get; set; } = [];
+        public Color? Foreground { get; set; }
+        public Color? Background { get; set; }
+
+        public FontStyle? FontStyle { get; set; }
     }
 
     public void ClearFormats() => _Formats.Clear();
@@ -164,12 +171,29 @@ public partial class List2List : UserControl
         var info = new FormatInfo() { Items = items, Foreground = foreground, Background = background, FontStyle = style };
         _Formats.Add(info);
     }
+    #endregion
 
-    public List<string> GetChosen() => LstDestination.ToStringList();
+    public List<object> GetDestinationList()
+    {
+        List<object> answer = [];
+        foreach (object item in LstDestination.Items)
+        {
+            answer.Add(item);
+        }
+        return answer;
+    }
 
-    public List<object> GetChosenObjects() => LstDestination.ToObjectList();
+    public List<object> GetSourceList()
+    {
+        List<object> answer = [];
+        foreach (object item in LstSource.Items)
+        {
+            answer.Add(item);
+        }
+        return answer;
+    }
 
-    public List<string> GetAll() => [.. LstSource.ToStringList(), .. LstDestination.ToStringList()];
+    public List<object> GetAllItems() => [.. GetDestinationList(), .. GetSourceList()];
 
     #region Moving items around
     private void BtnAddAll_Click(object sender, EventArgs e)
@@ -331,125 +355,58 @@ public partial class List2List : UserControl
 
     private void LstDestination_SelectedIndexChanged(object sender, EventArgs e) => BroadcastDestinationSelectedIndexChanged(e);
 
-    protected class FormatInfo
-    {
-        public HashSet<string?> Items { get; set; } = [];
-        public Color? Foreground { get; set; }
-        public Color? Background { get; set; }
-
-        public FontStyle? FontStyle { get; set; }
-    }
 }
 
-public static class ListBoxExtensions
+public class List2ListBacker<T> : ControlBacker<T>
 {
-    public static List<string> ToStringList(this ListBox box)
+    public List2ListBacker(List2List list2list, string destinationPropertyName, List<T> sourceItems)
+        : base(list2list, nameof(list2list.ChosenItems), destinationPropertyName)
     {
-        List<string> answer = [];
-        foreach (var item in box.Items)
-        {
-            string? val = item?.ToString();
-            if (val != null) { answer.Add(val); }
-        }
-        return answer;
-    }
-
-    public static List<object> ToObjectList(this ListBox box)
-    {
-        List<object> answer = [];
-        foreach (var item in box.Items)
-        {
-            answer.Add(item);
-        }
-        return answer;
-    }
-}
-
-public class List2ListBacker : ControlBacker<IEnumerable>
-{
-    protected string DataSourcePropertyName { get; set; }
-    protected string DataDestinationPropertyName { get; set; }
-    public List2ListBacker(List2List ctrl, string dataSourcePropertyName, string dataDestinationPropertyName)
-        : base(ctrl, nameof(ctrl.ChosenItems), dataDestinationPropertyName)
-    { 
-        DataSourcePropertyName = dataSourcePropertyName;
-        DataDestinationPropertyName = dataDestinationPropertyName;
+        List<object> sourceObjects = sourceItems.Cast<object>().ToList();
+        list2list.InitialiseSource(sourceObjects);
     }
 
     public override bool TryLoad(IBackingData data, out string msg)
     {
         if (Ctrl is List2List list2list)
         {
-            var source = data.GetPropertyValue(DataSourcePropertyName);
-            if (source is not null and IEnumerable sourceEnumerable)
+            if (data.TryGetPropertyValue(BackingPropertyName, out List<T>? items, out msg))
             {
-                list2list.InitialiseSource(sourceEnumerable);
-                return base.TryLoad(data, out msg);
-            }
-            else
-            {
-                msg = $"Internal error: Failed to load List2List, source '{DataSourcePropertyName}' was not an IEnumerable";
+                if (items != null)
+                {
+                    list2list.InitialiseDestination([.. items.Cast<object>()]);
+                    return true;
+                }
             }
         }
         else
         {
-            msg = $"Internal error: control {Ctrl.Name} is not a List2List control";
+            msg = $"Internal Error: Control {Ctrl.Name} is not a List2ListControl";
         }
         return false;
     }
 
-    public override bool TrySave(IBackingData data, out string msg) => base.TrySave(data, out msg);
-}
-
-public static class List2ListBackingMapExtensions
-{
-    public static void Add(this BackingMap backingMap, List2List ctrl, string dataSourcePropertyName, string dataDestinationPropertyName)
-    {
-        ControlBacker<IEnumerable> list2listBacker = new List2ListBacker(ctrl, dataSourcePropertyName, dataDestinationPropertyName);
-        backingMap.Add(list2listBacker);
-    }
-}
-
-/*
-public class List2ListControlMapping(List2List ctrl, string dataSourcePropertyName, string dataDestinationPropertyName)
-    : ControlMapping(ctrl, nameof(ctrl.ChosenItems), dataDestinationPropertyName)
-{
-    private string _DataSourcePropertyName { get; set; } = dataSourcePropertyName;
-    private string _DataDestinationPropertyName { get; set; } = dataDestinationPropertyName;
-
-    public override void Load(IBackingData data)
+    public override bool TrySave(IBackingData data, out String msg)
     {
         if (Ctrl is List2List list2list)
         {
-            var source = data.GetPropertyValue(_DataSourcePropertyName);
-            if (source != null && source is IEnumerable sourceEnumerable)
-            {
-                list2list.InitialiseSource(sourceEnumerable);
-                base.Load(data);
-            }
+            List<object> objects = list2list.ChosenItems;
+            List<T> items = [.. objects.Cast<T>()];
+            return data.TrySetPropertyValue(BackingPropertyName, items, out msg);
         }
-    }
-
-    public override void Save(IBackingData data)
-    {
-        if (Ctrl is List2List list2list)
+        else
         {
-            var chosen = list2list.GetChosenObjects();
-            if (chosen != null && chosen is IEnumerable chosenEnumerable)
-            {
-                data.SetPropertyValue(_DataDestinationPropertyName, chosenEnumerable);
-                base.Save(data);
-            }
+            msg = $"Internal Error: Control {Ctrl.Name} is not a List2ListControl";
         }
+        return false;
     }
 }
 
-public static class FormMapperExtensions
+public partial class BackingMap
 {
-    public static void Add(this FormMapper formMap, List2List list2List, string sourcePropertyName, string destinationPropertyName)
+    public void Add<T>(List2List ctrl, string dataDestinationPropertyName, List<T> sourceItems)
     {
-        var controlMapping = new List2ListControlMapping(list2List, sourcePropertyName, destinationPropertyName);
-        formMap.AddMapping(controlMapping);
+        var list2listBacker = new List2ListBacker<T>(ctrl, dataDestinationPropertyName, sourceItems);
+        ControlBackers.Add(list2listBacker);
     }
 }
-*/

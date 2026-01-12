@@ -37,6 +37,9 @@ namespace EtlaToolPicker
 
             BackingMap.Add(CmbZero, nameof(Data.Next), TopLevelData.AllTopLevelData);
 
+            //BackingMap.Add(L2lTest, nameof(Data.SomeChosenStrings), TopLevelData.SomeStrings);
+            BackingMap.Add(L2lTest, nameof(Data.ChosenTopLevelData), TopLevelData.AllTopLevelData);
+
             _ = new VisibiltyCascade(ChkFascias, GrpFascias);
             _ = new VisibiltyCascade(ChkAssemblyInfo, GrpAssemblyInfo);
         }

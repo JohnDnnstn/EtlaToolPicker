@@ -36,11 +36,15 @@ public class TopLevelData : IBackingData
         new TopLevelData() { ZeroToThree = ZeroToThree.THREE },
         new TopLevelData() { ZeroToThree = ZeroToThree.ZERO },
     ];
+
+    public List<TopLevelData> ChosenTopLevelData { get; set; } = [];
     public TopLevelData? Next { get; set; } = null;
 
     public static List<string> SomeStrings { get; set; } = ["x", "y", "z"];
 
     public string SomeString { get; set; } = "";
+
+    public List<string> SomeChosenStrings { get; set; } = [];
 
     public override string ToString() => ZeroToThree.ToString();
 }

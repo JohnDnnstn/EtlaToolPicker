@@ -4,7 +4,7 @@
 /// On the form being loaded, the form's controls are initialised to the contents of backing properties
 /// On the form being closed, the backing data properties are changed to match the equivalent control values
 /// </summary>
-public class BackingMap(IBackingData data)
+public partial class BackingMap(IBackingData data)
 {
     #region Properties
     protected IBackingData Data { get; set; } = data;
@@ -12,11 +12,6 @@ public class BackingMap(IBackingData data)
     #endregion
 
     #region Add methods
-
-    /// <summary>Adds a relationship between a control and its backing data.  
-    /// This version is for custom controls which declare their own ControlBacker</summary>
-    /// <param name="ctrlBacker">The control backer for a custom control to try and load data into the control and save it from the control</param>
-    protected void Add<T>(ControlBacker<T> ctrlBacker) => ControlBackers.Add(ctrlBacker);
 
     /// <summary>Adds a relationship between a control and its backing data</summary>
     /// <param name="ctrl">The control</param>

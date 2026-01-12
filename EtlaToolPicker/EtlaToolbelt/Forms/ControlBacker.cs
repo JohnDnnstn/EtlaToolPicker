@@ -36,7 +36,7 @@ public class ControlBacker<T>() : AbstractControlBacker
             return false; 
         }
 
-        ok = Ctrl.TrySetPropertyValue<T>(CtrlPropertyName, val, out msg);
+        ok = Ctrl.TrySetPropertyValue(CtrlPropertyName, val, out msg);
         if (!ok)
         {
             var thisMsg = $"Failed to load {Ctrl.Name} from backing data";
@@ -54,7 +54,7 @@ public class ControlBacker<T>() : AbstractControlBacker
     /// <returns><c>true</c> if the method succeeded; <c>false</c> otherwise</returns>
     public override bool TrySave(IBackingData data, out string msg)
     {
-        bool ok = Ctrl.TryGetPropertyValue<T>(CtrlPropertyName, out T? val, out msg);
+        bool ok = Ctrl.TryGetPropertyValue(CtrlPropertyName, out T? val, out msg);
         if (!ok)
         {
             var thisMsg = $"Failed to get property {CtrlPropertyName} of control when saving {Ctrl.Name}";

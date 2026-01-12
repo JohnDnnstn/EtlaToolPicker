@@ -102,7 +102,7 @@ public class Script
     /// <param name="maxLine">Linebreaks are introduced wherever the line length would exceed this number. Default: 120</param>
     /// <param name="startNewLine">If <c>true</c> then the block starts on a new line, otherwise first item appended to any preceding text.  Default: true</param>
     /// <returns>A block of text as defined above</returns>
-    internal void ItemPerLineJoin(IEnumerable<object> items, string separator = ",", int indentChange = 0, string itemPrefix = "", bool startNewLine = true)
+    internal void ItemPerLineJoin(IEnumerable<object?> items, string separator = ",", int indentChange = 0, string itemPrefix = "", bool startNewLine = true)
     { 
        _Builder.Append(items.ItemPerLineJoin(Indent + indentChange, separator, itemPrefix, startNewLine));
     }
@@ -136,11 +136,11 @@ public static class ScriptExtensions
     /// <param name="itemPrefix">A string included on ecah line between the tabs and the item.  Default:""</param>
     /// <param name="startNewLine">If <c>true</c> then the block starts on a new line, otherwise first item appended to any preceding text.  Default: true</param>
     /// <returns>A block of text with one item per line as described above</returns>
-    public static string ItemPerLineJoin(this IEnumerable<object> items, int indent, string separator = ",", string itemPrefix = "", bool startNewLine = true)
+    public static string ItemPerLineJoin(this IEnumerable<object?> items, int indent, string separator = ",", string itemPrefix = "", bool startNewLine = true)
     {
         if (items == null) { return ""; }
         // Remove nulls, apply ToString, and deal with the (weird) possibility that ToString returns a null
-        string[] strings = [.. items.Where(i => i != null).Select(i => i.ToString() ?? "???")];
+        string[] strings = [.. items.Where(i => i != null).Select(i => i?.ToString() ?? "???")];
         if (strings.Length < 1) { return ""; }
 
         string tabs = new('\t', indent);
