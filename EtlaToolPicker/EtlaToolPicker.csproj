@@ -4,13 +4,19 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
-	
-	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+
+		<UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
-  <ItemGroup>
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command="&quot;$(ProjectDir)Properties\PreBuild.cmd&quot; &quot;$(SolutionDir)&quot;" />
+	</Target>
+
+
+	<ItemGroup>
     <Compile Update="EtlaToolbelt\BlackAndWhite.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -99,9 +105,5 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-	
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="&quot;$(ProjectDir)Properties\PreBuild.cmd&quot; &quot;$(SolutionDir)&quot;" />
-  </Target>
 
 </Project>

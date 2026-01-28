@@ -28,9 +28,7 @@ namespace EtlaToolPicker.EtlaToolbelt
         /// <param name="minOperand">Optional. The minimum number of operands. Default=0</param>
         /// <param name="maxOperand">Optional. The maximum number of operands. Default=999</param>
         public static void DefineCmdLine(List<string> switches, List<string>? operandNames = null, int minOperand = 0, int maxOperand = 999)
-        {
-            Implementation.DefineCmdLine(switches, operandNames, minOperand, maxOperand);
-        }
+            =>  Implementation.DefineCmdLine(switches, operandNames, minOperand, maxOperand);
 
         /// <summary>The method which compares the actual command line to the expected command line (as defined in the DefineCmdLine method)
         /// </summary>

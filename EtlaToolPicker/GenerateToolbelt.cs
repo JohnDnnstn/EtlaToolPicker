@@ -31,8 +31,11 @@ internal static class GenerateToolbelt
         if (data.HasForms && !ProcessDirectory("Forms")) { return false; }
 
         if (data.HasFascias)
-        { 
-            if (data.HasContexts && !ProcessDirectory("Contexts")) { return false; }
+        {
+            if (!ProcessDirectory("Infrastructure")) { return false; }
+            if (data.HasCmdLines && (!ProcessFile("CmdLine.cs", "") || !ProcessDirectory("CmdLines"))) { return false; }
+            if (data.HasContexts && (!ProcessFile("Context.cs","") || !ProcessDirectory("Contexts"))) { return false; }
+            if (data.HasLogs && (!ProcessFile("Log.cs", "") || !ProcessDirectory("Logs"))) { return false; }
         }
 
         if (data.HasAssemblyInfo)
@@ -52,7 +55,7 @@ internal static class GenerateToolbelt
             {
                 var msg = $"Internal error: directory {sourceDir} does not exist";
                 Log.Error(msg);
-                MessageBox.Show(msg, "Internal error", MessageBoxButtons.OK);
+                _ = MessageBox.Show(msg, "Internal error", MessageBoxButtons.OK);
                 return false;
             }
             foreach (var filepath in Directory.GetFiles(sourceDir))
@@ -72,7 +75,7 @@ internal static class GenerateToolbelt
         {
             var msg = $"Internal error: Failed to process directory '{subDirectory}'";
             Log.Error(msg, ex);
-            MessageBox.Show(msg, "Internal error", MessageBoxButtons.OK);
+            _ = MessageBox.Show(msg, "Internal error", MessageBoxButtons.OK);
             return false;
         }
     }
@@ -86,7 +89,7 @@ internal static class GenerateToolbelt
             {
                 var msg = $"Internal error: file {sourceFilepath} does not exist";
                 Log.Error(msg);
-                MessageBox.Show(msg, "Internal error", MessageBoxButtons.OK);
+                _ = MessageBox.Show(msg, "Internal error", MessageBoxButtons.OK);
                 return false;
             }
 
@@ -95,7 +98,7 @@ internal static class GenerateToolbelt
             text = text.Replace("using EtlaToolPicker", $"using {_TargetNamespace}");
 
             var targetDir = Path.Combine(_TargetDirectory, "EtlaToolbelt", subDirectory);
-            if (!Directory.Exists(targetDir)) { Directory.CreateDirectory(targetDir); }
+            if (!Directory.Exists(targetDir)) { _ = Directory.CreateDirectory(targetDir); }
             var targetFilepath = Path.Combine(targetDir, fileName);
 
             File.WriteAllText(targetFilepath, text);
@@ -105,7 +108,7 @@ internal static class GenerateToolbelt
         {
             var msg = $"Internal error: Failed to process file '{fileName}'";
             Log.Error(msg, ex);
-            MessageBox.Show(msg, "Internal error", MessageBoxButtons.OK);
+            _ = MessageBox.Show(msg, "Internal error", MessageBoxButtons.OK);
             return false;
         }
     }
@@ -117,7 +120,7 @@ internal static class GenerateToolbelt
             _Builder = new StringBuilder();
             _Indent = 0;
 
-            Scr($"namespace {_TargetNamespace}.Properties");
+            Scr($"namespace {_TargetNamespace}.Properties;");
             Scr();
             Scr("public static class AssemblyDefinitions");
             Scr("{", 1);
@@ -133,20 +136,19 @@ internal static class GenerateToolbelt
             Scr("}", -1);
 
             var targetDir = Path.Combine(_TargetDirectory, "Properties");
-            if (!Directory.Exists(targetDir)) { Directory.CreateDirectory(targetDir); }
-            var targetFilepath = Path.Combine(targetDir, "AssemblyDefintions.cs");
+            if (!Directory.Exists(targetDir)) { _ = Directory.CreateDirectory(targetDir); }
+            var targetFilepath = Path.Combine(targetDir, "AssemblyDefinitions.cs");
 
             File.WriteAllText(targetFilepath, _Builder.ToString());
 
             if (!ProcessFile("AssemblyInfo.gitwcrev", "..\\Properties")) { return false; }
-            if (!ProcessFile("PreBuild.cmd", "..\\Properties")) { return false; }
-            return true;
+            return ProcessFile("PreBuild.cmd", "..\\Properties");
         }
         catch (Exception ex)
         {
             var msg = $"Internal error: Failed to generate AssemblyDefinitions";
             Log.Error(msg, ex);
-            MessageBox.Show(msg, "Internal error", MessageBoxButtons.OK);
+            _ = MessageBox.Show(msg, "Internal error", MessageBoxButtons.OK);
             return false;
         }
     }
@@ -162,13 +164,13 @@ internal static class GenerateToolbelt
         if (data.TargetDirectory.IsWhite() || data.TargetNamespace.IsWhite())
         {
             var msg = "Target Directory and Target Namespace must not be blank";
-            MessageBox.Show(msg,"User input required",MessageBoxButtons.OK);
+            _ = MessageBox.Show(msg, "User input required", MessageBoxButtons.OK);
             return false;
         }
         if (!Directory.Exists(data.TargetDirectory))
         {
             var msg = $"{data.TargetDirectory} does not exist";
-            MessageBox.Show(msg, "User input required", MessageBoxButtons.OK);
+            _ = MessageBox.Show(msg, "User input required", MessageBoxButtons.OK);
             return false;
         }
         if (appDir.IsWhite() || !Directory.Exists(appDir))
@@ -183,10 +185,10 @@ internal static class GenerateToolbelt
     private static void Scr() => _Builder.AppendLine();
     private static void Scr(string str)
     { 
-        _Builder.AppendLine();
+        _ = _Builder.AppendLine();
         var tabs = new string('\t', _Indent);
-        _Builder.Append(tabs);
-        _Builder.Append(str); 
+        _ = _Builder.Append(tabs);
+        _ = _Builder.Append(str); 
     }
     private static void Scr(string str, int indent)    
     {
