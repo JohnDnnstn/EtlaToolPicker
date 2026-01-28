@@ -40,8 +40,40 @@ namespace EtlaToolPicker
             //BackingMap.Add(L2lTest, nameof(Data.SomeChosenStrings), TopLevelData.SomeStrings);
             BackingMap.Add(L2lTest, nameof(Data.ChosenTopLevelData), TopLevelData.AllTopLevelData);
 
+            BackingMap.Add<BaseCol>(GrdTest, nameof(Data.BaseCols));
+
             _ = new VisibiltyCascade(ChkFascias, GrpFascias);
             _ = new VisibiltyCascade(ChkAssemblyInfo, GrpAssemblyInfo);
+        }
+
+        private void InitGrid()
+        {
+            GrdTest.Columns.Clear();
+
+            GrdTest.AutoGenerateColumns = true;
+            GrdTest.AutoSize = true;
+
+            DataGridViewColumn gridCol = new DataGridViewTextBoxColumn();
+            gridCol.DataPropertyName = gridCol.Name = nameof(BaseCol.Id);
+            gridCol.ReadOnly = true;
+            GrdTest.Columns.Add(gridCol);
+
+            gridCol = new DataGridViewTextBoxColumn();
+            gridCol.DataPropertyName = gridCol.Name = "ColName";
+            GrdTest.Columns.Add(gridCol);
+
+            gridCol = new DataGridViewTextBoxColumn();
+            gridCol.DataPropertyName = gridCol.Name = "SomeText";
+            GrdTest.Columns.Add(gridCol);
+
+            GrdTest.Visible = GrdTest.Enabled = true;
+            GrdTest.Refresh();
+        }
+
+
+        private void TopLevelForm_Load(object sender, EventArgs e)
+        {
+            InitGrid();
         }
 
         private void BtnBrowse_Click(object sender, EventArgs e)
@@ -76,5 +108,6 @@ namespace EtlaToolPicker
             Console.WriteLine(temp);
 
         }
+
     }
 }

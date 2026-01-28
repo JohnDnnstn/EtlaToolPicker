@@ -5,3 +5,15 @@
 /// On the form being closed, the backing data properties are changed to match the equivalent control values
 /// </summary>
 public interface IBackingData { }
+
+public interface IGridRowBackingData : ICloneable 
+{
+    bool TryCopyTo(IGridRowBackingData target, out string msg);
+    bool HasSameKeyAs(IGridRowBackingData item);
+}
+
+public interface IGridListBackingData<T> : 
+    IList<T> 
+    where T : IGridRowBackingData
+{ 
+}

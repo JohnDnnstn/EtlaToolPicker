@@ -362,7 +362,7 @@ public class List2ListBacker<T> : ControlBacker<T>
     public List2ListBacker(List2List list2list, string destinationPropertyName, List<T> sourceItems)
         : base(list2list, nameof(list2list.ChosenItems), destinationPropertyName)
     {
-        List<object> sourceObjects = sourceItems.Cast<object>().ToList();
+        List<object> sourceObjects = [.. sourceItems.Cast<object>()];
         list2list.InitialiseSource(sourceObjects);
     }
 

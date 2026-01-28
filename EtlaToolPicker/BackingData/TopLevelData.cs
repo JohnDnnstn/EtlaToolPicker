@@ -47,4 +47,9 @@ public class TopLevelData : IBackingData
     public List<string> SomeChosenStrings { get; set; } = [];
 
     public override string ToString() => ZeroToThree.ToString();
+
+    public List<BaseCol> BaseCols { get; set; } = [
+        new BaseCol("Fred"){ SomeText = "Fred Text"},
+        new BaseCol("Barney") { SomeText = "Barney Text"},
+        ];
 }

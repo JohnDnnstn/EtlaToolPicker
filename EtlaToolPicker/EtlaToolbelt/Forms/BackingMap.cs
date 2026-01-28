@@ -80,6 +80,12 @@ public partial class BackingMap(IBackingData data)
         ControlBackers.Add(ctrlBacker);
     }
 
+    public void Add<T>(DataGridView grid, string dataPropertyName) where T : IGridRowBackingData
+    {
+        var ctrlBacker = new GridBacker<T>(grid, dataPropertyName);
+        ControlBackers.Add(ctrlBacker);
+    }
+
     #endregion
 
     //public void Load()

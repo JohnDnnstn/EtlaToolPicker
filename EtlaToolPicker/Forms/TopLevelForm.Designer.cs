@@ -65,9 +65,11 @@
             CmbSomeString = new ComboBox();
             BtnScript = new Button();
             L2lTest = new EtlaToolPicker.EtlaToolbelt.Forms.List2List();
+            GrdTest = new DataGridView();
             GrpFascias.SuspendLayout();
             GrpAssemblyInfo.SuspendLayout();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)GrdTest).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -433,11 +435,20 @@
             L2lTest.Size = new Size(423, 160);
             L2lTest.TabIndex = 24;
             // 
+            // GrdTest
+            // 
+            GrdTest.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            GrdTest.Location = new Point(821, 122);
+            GrdTest.Name = "GrdTest";
+            GrdTest.Size = new Size(523, 124);
+            GrdTest.TabIndex = 25;
+            // 
             // TopLevelForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1379, 450);
+            Controls.Add(GrdTest);
             Controls.Add(L2lTest);
             Controls.Add(BtnScript);
             Controls.Add(CmbSomeString);
@@ -461,12 +472,14 @@
             Controls.Add(label1);
             Name = "TopLevelForm";
             Text = "Top level Form";
+            Load += TopLevelForm_Load;
             GrpFascias.ResumeLayout(false);
             GrpFascias.PerformLayout();
             GrpAssemblyInfo.ResumeLayout(false);
             GrpAssemblyInfo.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)GrdTest).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -510,5 +523,6 @@
         private ComboBox CmbSomeString;
         private Button BtnScript;
         private EtlaToolbelt.Forms.List2List L2lTest;
+        private DataGridView GrdTest;
     }
 }
