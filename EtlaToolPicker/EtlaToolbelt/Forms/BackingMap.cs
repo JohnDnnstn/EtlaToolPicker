@@ -4,12 +4,17 @@
 /// On the form being loaded, the form's controls are initialised to the contents of backing properties
 /// On the form being closed, the backing data properties are changed to match the equivalent control values
 /// </summary>
-public partial class BackingMap(IBackingData data)
+public partial class BackingMap
 {
     #region Properties
-    protected IBackingData Data { get; set; } = data;
+    protected IBackingData Data { get; set; }
     protected List<AbstractControlBacker> ControlBackers { get; set; } = [];
     #endregion
+
+    // Only used by the Designer
+    public BackingMap() => Data = new EmptyBackingData();
+
+    public BackingMap(IBackingData data) => Data = data;
 
     #region Add methods
 
@@ -88,14 +93,6 @@ public partial class BackingMap(IBackingData data)
 
     #endregion
 
-    //public void Load()
-    //{
-    //    foreach(ControlBacker ctrlBacker in ControlBackers)
-    //    {
-    //        ctrlBacker.Load(Data);
-    //    }
-    //}
-
     public void Load()
     {
         foreach (AbstractControlBacker ctrlBacker in ControlBackers)
@@ -109,13 +106,7 @@ public partial class BackingMap(IBackingData data)
         }
     }
 
-    //public void Save()
-    //{
-    //    foreach (ControlBacker ctrlBacker in ControlBackers)
-    //    {
-    //        ctrlBacker.Save(Data);
-    //    }
-    //}
+    public void Save() => _ = TrySave();
 
     public bool TrySave()
     {

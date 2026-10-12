@@ -6,8 +6,6 @@
 //	To make changes or additions, rerun the ETLA Toolbelt Wizard after editing T4 templates if required
 // --------------------------------------------------------------------------------------------------
 
-using EtlaToolPicker.EtlaToolbelt.Logs;
-using EtlaToolPicker.EtlaToolbelt;
 using System.Diagnostics;
 
 namespace EtlaToolPicker.EtlaToolbelt.Logs;

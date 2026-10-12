@@ -6,9 +6,6 @@
 //	To make changes or additions, rerun the ETLA Toolbelt Wizard after editing T4 templates if required
 // --------------------------------------------------------------------------------------------------
 
-using EtlaToolPicker.EtlaToolbelt;
-using EtlaToolPicker.EtlaToolbelt.Logs;
-
 namespace EtlaToolPicker.EtlaToolbelt.Logs;
 
 /// <summary>Default implementations of the ILogSink

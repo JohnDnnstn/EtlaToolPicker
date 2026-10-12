@@ -54,7 +54,7 @@ GOTO ifAssumptionsWrong
 
 @FOR /f %%i IN ('"powershell (Get-Date).ToString(\"yyyy\")"') DO SET year=%%i
 @FOR /f %%i IN ('"powershell (New-Guid).ToString()"') DO SET guid=%%i
-@FOR /f %%i IN ('powershell Split-Path %solutionDir% -leaf') DO SET myNamespace=%%i
+@FOR /f %%i IN ('powershell Split-Path %thisDir%\.. -leaf') DO SET myNamespace=%%i
 
 @IF NOT EXIST %assemblyDefinitions% CALL :generateAssemblyDefinitions 
 @IF NOT EXIST %assembly_cs%         CALL :generateAssemblyInfo %assembly_cs%

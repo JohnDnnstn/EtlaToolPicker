@@ -1,79 +1,45 @@
 using EtlaToolPicker.BackingData;
 using EtlaToolPicker.EtlaToolbelt.Forms;
-using static EtlaToolPicker.Program;
 
 namespace EtlaToolPicker
 {
     public partial class TopLevelForm : BackedForm
     {
-        protected TopLevelData Data { get; set; }
+        protected TopLevelData Data { get; set; } = new TopLevelData();
 
+        protected TopLevelForm() { }
         public TopLevelForm(TopLevelData data) : base(data)
         {
             InitializeComponent();
             Data = data;
 
-            BackingMap.Add(TxtTargetDir, nameof(Data.TargetDirectory));
-            BackingMap.Add(TxtNamespace, nameof(Data.TargetNamespace));
-            BackingMap.Add(ChkBlackAndWhite, nameof(Data.HasBlackAndWhite));
-            BackingMap.Add(ChkScript, nameof(Data.HasScripts));
-            BackingMap.Add(ChkForm, nameof(Data.HasForms));
-            BackingMap.Add(ChkWizard, nameof(Data.HasWizards));
-            BackingMap.Add(ChkFascias, nameof(Data.HasFascias));
-            BackingMap.Add(ChkCmdLine, nameof(Data.CmdLines));
-            BackingMap.Add(ChkLog, nameof(Data.Logs));
+            Map.Add(TxtTargetDir, nameof(Data.TargetDirectory));
+            Map.Add(TxtNamespace, nameof(Data.TargetNamespace));
+
+            Map.Add(ChkBlackAndWhite, nameof(Data.HasBlackAndWhite));
+            Map.Add(ChkScript, nameof(Data.HasScripts));
+            Map.Add(ChkForm, nameof(Data.HasForms));
+            Map.Add(ChkWizard, nameof(Data.HasWizards));
+
+            Map.Add(ChkFascias, nameof(Data.HasFascias));
+            Map.Add(ChkCmdLine, nameof(Data.CmdLines));
+            Map.Add(ChkLog, nameof(Data.Logs));
             //Backing.Add(ChkConfig, nameof(Data.HasConfig));
-            BackingMap.Add(ChkContext, nameof(Data.Contexts));
-            BackingMap.Add(ChkAssemblyInfo, nameof(Data.HasAssemblyInfo));
-            BackingMap.Add(TxtApplication, nameof(Data.ApplicationName));
-            BackingMap.Add(TxtCompany, nameof(Data.CompanyName));
+            Map.Add(ChkContext, nameof(Data.Contexts));
 
-            BackingMap.Add(RdoZero, nameof(Data.ZeroToThree), ZeroToThree.ZERO);
-            BackingMap.Add(RdoOne, nameof(Data.ZeroToThree), ZeroToThree.ONE);
-            BackingMap.Add(RdoTwo, nameof(Data.ZeroToThree), ZeroToThree.TWO);
-            BackingMap.Add(RdoThree, nameof(Data.ZeroToThree), ZeroToThree.THREE);
+            Map.Add(ChkPostgres, nameof(Data.HasPostgres));
 
-            BackingMap.Add(CmbSomeString, nameof(Data.SomeString), TopLevelData.SomeStrings);
+            Map.Add(ChkAssemblyInfo, nameof(Data.HasAssemblyInfo));
+            Map.Add(TxtApplication, nameof(Data.ApplicationName));
+            Map.Add(TxtCompany, nameof(Data.CompanyName));
 
-            BackingMap.Add(CmbZero, nameof(Data.Next), TopLevelData.AllTopLevelData);
-
-            //BackingMap.Add(L2lTest, nameof(Data.SomeChosenStrings), TopLevelData.SomeStrings);
-            BackingMap.Add(L2lTest, nameof(Data.ChosenTopLevelData), TopLevelData.AllTopLevelData);
-
-            BackingMap.Add<BaseCol>(GrdTest, nameof(Data.BaseCols));
-
-            _ = new VisibiltyCascade(ChkFascias, GrpFascias);
-            _ = new VisibiltyCascade(ChkAssemblyInfo, GrpAssemblyInfo);
-        }
-
-        private void InitGrid()
-        {
-            GrdTest.Columns.Clear();
-
-            GrdTest.AutoGenerateColumns = true;
-            GrdTest.AutoSize = true;
-
-            DataGridViewColumn gridCol = new DataGridViewTextBoxColumn();
-            gridCol.DataPropertyName = gridCol.Name = nameof(BaseCol.Id);
-            gridCol.ReadOnly = true;
-            GrdTest.Columns.Add(gridCol);
-
-            gridCol = new DataGridViewTextBoxColumn();
-            gridCol.DataPropertyName = gridCol.Name = "ColName";
-            GrdTest.Columns.Add(gridCol);
-
-            gridCol = new DataGridViewTextBoxColumn();
-            gridCol.DataPropertyName = gridCol.Name = "SomeText";
-            GrdTest.Columns.Add(gridCol);
-
-            GrdTest.Visible = GrdTest.Enabled = true;
-            GrdTest.Refresh();
+            Cascades.Visibility(GrpFascias, ChkFascias);
+            Cascades.Visibility(GrpAssemblyInfo, ChkAssemblyInfo);
         }
 
 
         private void TopLevelForm_Load(object sender, EventArgs e)
         {
-            InitGrid();
         }
 
         private void BtnBrowse_Click(object sender, EventArgs e)
@@ -83,6 +49,8 @@ namespace EtlaToolPicker
                 if (browser.ShowDialog() == DialogResult.OK)
                 {
                     TxtTargetDir.Text = browser.SelectedPath;
+                    TxtNamespace.Text = Path.GetFileName(browser.SelectedPath);
+                    TxtApplication.Text = TxtNamespace.Text;
                 }
             }
         }

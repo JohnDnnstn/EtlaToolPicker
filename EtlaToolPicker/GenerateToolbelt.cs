@@ -1,6 +1,5 @@
 ﻿using EtlaToolPicker.BackingData;
 using EtlaToolPicker.EtlaToolbelt;
-using Microsoft.VisualBasic.ApplicationServices;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
@@ -26,16 +25,28 @@ internal static class GenerateToolbelt
         _TargetDirectory = data.TargetDirectory;
         _TargetNamespace = data.TargetNamespace;
 
+        // These tools do not rely on Fascia-style tools.  Add them if checked but stop processing should anything fail
         if (data.HasBlackAndWhite && !ProcessFile("BlackAndWhite.cs", "")) { return false; }
         if (data.HasScripts && !ProcessFile("Script.cs", "")) { return false; }
         if (data.HasForms && !ProcessDirectory("Forms")) { return false; }
+        if (data.HasWizards && !ProcessWizards()) { return false; }
 
         if (data.HasFascias)
         {
+            // Stop this processing immediately should anything fail
             if (!ProcessDirectory("Infrastructure")) { return false; }
             if (data.HasCmdLines && (!ProcessFile("CmdLine.cs", "") || !ProcessDirectory("CmdLines"))) { return false; }
             if (data.HasContexts && (!ProcessFile("Context.cs","") || !ProcessDirectory("Contexts"))) { return false; }
             if (data.HasLogs && (!ProcessFile("Log.cs", "") || !ProcessDirectory("Logs"))) { return false; }
+        }
+
+        if (data.HasPostgres)
+        {
+            // The Postgres base relies on CmdLines and Log whatever was chosen
+            if (!ProcessDirectory("Infrastructure")) { return false; }
+            if ((!ProcessFile("CmdLine.cs", "") || !ProcessDirectory("CmdLines"))) { return false; }
+            if ((!ProcessFile("Log.cs", "") || !ProcessDirectory("Logs"))) { return false; }
+            if (!ProcessDirectory("Postgres")) { return false; }
         }
 
         if (data.HasAssemblyInfo)
@@ -46,10 +57,16 @@ internal static class GenerateToolbelt
         return true;
     }
 
-    private static bool ProcessDirectory(string subDirectory)
+    private static bool ProcessWizards()
+    {
+        return ProcessDirectory("WizardForms","Forms") && ProcessDirectory("Wizards");
+    }
+
+    private static bool ProcessDirectory(string subDirectory, string? targetDirectory = null)
     {
         try
         {
+            targetDirectory ??= subDirectory;
             var sourceDir = Path.Combine(_AppDir, "EtlaToolbelt", subDirectory);
             if (!Directory.Exists(sourceDir))
             {
@@ -61,7 +78,7 @@ internal static class GenerateToolbelt
             foreach (var filepath in Directory.GetFiles(sourceDir))
             {
                 var filename = Path.GetFileName(filepath);
-                var ok = ProcessFile(filename, subDirectory);
+                var ok = ProcessFile(filename, subDirectory, targetDirectory);
                 if (!ok) 
                 {
                     var msg = $"Internal error: Failed to process directory '{subDirectory}'";
@@ -80,10 +97,11 @@ internal static class GenerateToolbelt
         }
     }
 
-    private static bool ProcessFile(string fileName, string subDirectory)
+    private static bool ProcessFile(string fileName, string subDirectory, string? targetDirectory = null)
     {
         try
         {
+            targetDirectory ??= subDirectory;
             var sourceFilepath = Path.Combine(_AppDir, "EtlaToolbelt", subDirectory, fileName);
             if (!File.Exists(sourceFilepath))
             {
@@ -97,7 +115,7 @@ internal static class GenerateToolbelt
             text = text.Replace("namespace EtlaToolPicker", $"namespace {_TargetNamespace}");
             text = text.Replace("using EtlaToolPicker", $"using {_TargetNamespace}");
 
-            var targetDir = Path.Combine(_TargetDirectory, "EtlaToolbelt", subDirectory);
+            var targetDir = Path.Combine(_TargetDirectory, "EtlaToolbelt", targetDirectory);
             if (!Directory.Exists(targetDir)) { _ = Directory.CreateDirectory(targetDir); }
             var targetFilepath = Path.Combine(targetDir, fileName);
 

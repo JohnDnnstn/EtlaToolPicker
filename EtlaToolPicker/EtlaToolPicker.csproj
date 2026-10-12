@@ -15,6 +15,10 @@
 		<Exec Command="&quot;$(ProjectDir)Properties\PreBuild.cmd&quot; &quot;$(SolutionDir)&quot;" />
 	</Target>
 
+	<ItemGroup>
+	  <PackageReference Include="Npgsql" Version="10.0.3" />
+	</ItemGroup>
+
 
 	<ItemGroup>
     <Compile Update="EtlaToolbelt\BlackAndWhite.cs">
@@ -39,9 +43,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Update="EtlaToolbelt\Contexts\IContext.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Update="EtlaToolbelt\Forms\BackedForm.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Update="EtlaToolbelt\Forms\BackingMap.cs">
@@ -92,10 +93,53 @@
     <Compile Update="EtlaToolbelt\Logs\LogMessage.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Update="EtlaToolbelt\Postgres\ILoaderInitialiser.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="EtlaToolbelt\Postgres\Initialiser.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="EtlaToolbelt\Postgres\IPostgresBase.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="EtlaToolbelt\Postgres\PostgresBase.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Update="EtlaToolbelt\Script.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Update="EtlaToolbelt\WizardForms\BaseWizardForm.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="EtlaToolbelt\WizardForms\BaseWizardForm.Designer.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="EtlaToolbelt\WizardForms\RepeatingWizardForm.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="EtlaToolbelt\WizardForms\RepeatingWizardForm.Designer.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="EtlaToolbelt\Wizards\BaseWizard.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="EtlaToolbelt\Wizards\IRepeatingWizardData.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="EtlaToolbelt\Wizards\RepeatingWizard.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
   </ItemGroup>
+
+
+	<ItemGroup>
+	  <EmbeddedResource Update="EtlaToolbelt\WizardForms\BaseWizardForm.resx">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="EtlaToolbelt\WizardForms\RepeatingWizardForm.resx">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	</ItemGroup>
 
   <ItemGroup>
     <None Update="Properties\AssemblyInfo.gitwcrev">

@@ -6,6 +6,8 @@
 /// </summary>
 public interface IBackingData { }
 
+public class EmptyBackingData : IBackingData { }
+
 public interface IGridRowBackingData : ICloneable 
 {
     bool TryCopyTo(IGridRowBackingData target, out string msg);

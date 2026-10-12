@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Windows.Forms;
-
-namespace EtlaToolPicker.EtlaToolbelt.Forms;
+﻿namespace EtlaToolPicker.EtlaToolbelt.Forms;
 
 public abstract class AbstractControlBacker
 { 
@@ -128,8 +124,7 @@ public class ComboBoxBacker<T> : ControlBacker<T>
         }
         if (limitToList != null)
         {
-            if (limitToList.Value) { cmbBox.DropDownStyle = ComboBoxStyle.DropDownList; }
-            else { cmbBox.DropDownStyle = ComboBoxStyle.DropDown; }
+            cmbBox.DropDownStyle = limitToList.Value ? ComboBoxStyle.DropDownList : ComboBoxStyle.DropDown;
         }
     }
 
@@ -147,8 +142,7 @@ public class ComboBoxBacker<T> : ControlBacker<T>
         }
         if (limitToList != null)
         {
-            if (limitToList.Value) { cmbBox.DropDownStyle = ComboBoxStyle.DropDownList; }
-            else { cmbBox.DropDownStyle = ComboBoxStyle.DropDown; }
+            cmbBox.DropDownStyle = limitToList.Value ? ComboBoxStyle.DropDownList : ComboBoxStyle.DropDown;
         }
     }
 

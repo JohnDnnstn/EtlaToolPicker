@@ -34,12 +34,9 @@ public static class BlackAndWhite
     /// Note: 
     /// The fallback cannot be null but can be white
     /// </summary>
-    /// <param name="candidate"></param>
-    /// <param name="fallback"></param>
+    /// <param name="candidate">The string to check</param>
+    /// <param name="fallback">The string to supply if the candidate is white</param>
     /// <returns>The candidate, or the fallback if the candidate is white</returns>
-    public static string IfWhite(this string? candidate, string fallback) 
-    { 
-        return candidate.IsBlack() ? candidate : fallback; 
-    }
+    public static string IfWhite(this string? candidate, string fallback) => candidate.IsBlack() ? candidate : fallback;
 
 }

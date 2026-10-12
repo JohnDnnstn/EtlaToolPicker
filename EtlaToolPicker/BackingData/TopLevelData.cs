@@ -27,6 +27,13 @@ public class TopLevelData : IBackingData
     public string ApplicationName { get; set; } = "MyApp";
     public string CompanyName { get; set; } = "MyCo";
 
+    public bool HasPostgres { get; set; } = false;
+
+
+    //================================================================================
+    // Test stuff
+    //================================================================================
+
     public ZeroToThree ZeroToThree { get; set; } = ZeroToThree.TWO;
 
 

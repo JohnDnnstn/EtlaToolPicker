@@ -56,20 +56,10 @@
             label4 = new Label();
             label3 = new Label();
             BtnSave = new Button();
-            groupBox1 = new GroupBox();
-            RdoThree = new RadioButton();
-            RdoTwo = new RadioButton();
-            RdoOne = new RadioButton();
-            RdoZero = new RadioButton();
-            CmbZero = new ComboBox();
-            CmbSomeString = new ComboBox();
             BtnScript = new Button();
-            L2lTest = new EtlaToolPicker.EtlaToolbelt.Forms.List2List();
-            GrdTest = new DataGridView();
+            ChkPostgres = new CheckBox();
             GrpFascias.SuspendLayout();
             GrpAssemblyInfo.SuspendLayout();
-            groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)GrdTest).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -345,79 +335,6 @@
             BtnSave.UseVisualStyleBackColor = true;
             BtnSave.Click += BtnSave_Click;
             // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(RdoThree);
-            groupBox1.Controls.Add(RdoTwo);
-            groupBox1.Controls.Add(RdoOne);
-            groupBox1.Controls.Add(RdoZero);
-            groupBox1.Location = new Point(139, 296);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(200, 125);
-            groupBox1.TabIndex = 20;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
-            // 
-            // RdoThree
-            // 
-            RdoThree.AutoSize = true;
-            RdoThree.Location = new Point(10, 97);
-            RdoThree.Name = "RdoThree";
-            RdoThree.Size = new Size(55, 19);
-            RdoThree.TabIndex = 21;
-            RdoThree.TabStop = true;
-            RdoThree.Text = "Three";
-            RdoThree.UseVisualStyleBackColor = true;
-            // 
-            // RdoTwo
-            // 
-            RdoTwo.AutoSize = true;
-            RdoTwo.Location = new Point(10, 72);
-            RdoTwo.Name = "RdoTwo";
-            RdoTwo.Size = new Size(47, 19);
-            RdoTwo.TabIndex = 21;
-            RdoTwo.TabStop = true;
-            RdoTwo.Text = "Two";
-            RdoTwo.UseVisualStyleBackColor = true;
-            // 
-            // RdoOne
-            // 
-            RdoOne.AutoSize = true;
-            RdoOne.Location = new Point(10, 47);
-            RdoOne.Name = "RdoOne";
-            RdoOne.Size = new Size(47, 19);
-            RdoOne.TabIndex = 21;
-            RdoOne.TabStop = true;
-            RdoOne.Text = "One";
-            RdoOne.UseVisualStyleBackColor = true;
-            // 
-            // RdoZero
-            // 
-            RdoZero.AutoSize = true;
-            RdoZero.Location = new Point(10, 22);
-            RdoZero.Name = "RdoZero";
-            RdoZero.Size = new Size(49, 19);
-            RdoZero.TabIndex = 0;
-            RdoZero.TabStop = true;
-            RdoZero.Text = "Zero";
-            RdoZero.UseVisualStyleBackColor = true;
-            // 
-            // CmbZero
-            // 
-            CmbZero.FormattingEnabled = true;
-            CmbZero.Location = new Point(12, 356);
-            CmbZero.Name = "CmbZero";
-            CmbZero.Size = new Size(111, 23);
-            CmbZero.TabIndex = 21;
-            // 
-            // CmbSomeString
-            // 
-            CmbSomeString.FormattingEnabled = true;
-            CmbSomeString.Location = new Point(12, 314);
-            CmbSomeString.Name = "CmbSomeString";
-            CmbSomeString.Size = new Size(111, 23);
-            CmbSomeString.TabIndex = 22;
-            // 
             // BtnScript
             // 
             BtnScript.Location = new Point(522, 414);
@@ -428,32 +345,23 @@
             BtnScript.UseVisualStyleBackColor = true;
             BtnScript.Click += BtnScript_Click;
             // 
-            // L2lTest
+            // ChkPostgres
             // 
-            L2lTest.Location = new Point(359, 252);
-            L2lTest.Name = "L2lTest";
-            L2lTest.Size = new Size(423, 160);
-            L2lTest.TabIndex = 24;
-            // 
-            // GrdTest
-            // 
-            GrdTest.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            GrdTest.Location = new Point(821, 122);
-            GrdTest.Name = "GrdTest";
-            GrdTest.Size = new Size(523, 124);
-            GrdTest.TabIndex = 25;
+            ChkPostgres.AutoSize = true;
+            ChkPostgres.Location = new Point(156, 277);
+            ChkPostgres.Name = "ChkPostgres";
+            ChkPostgres.Size = new Size(141, 19);
+            ChkPostgres.TabIndex = 24;
+            ChkPostgres.Text = "Postgres Connections";
+            ChkPostgres.UseVisualStyleBackColor = true;
             // 
             // TopLevelForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1379, 450);
-            Controls.Add(GrdTest);
-            Controls.Add(L2lTest);
+            ClientSize = new Size(829, 450);
+            Controls.Add(ChkPostgres);
             Controls.Add(BtnScript);
-            Controls.Add(CmbSomeString);
-            Controls.Add(CmbZero);
-            Controls.Add(groupBox1);
             Controls.Add(BtnSave);
             Controls.Add(GrpAssemblyInfo);
             Controls.Add(ChkAssemblyInfo);
@@ -477,9 +385,6 @@
             GrpFascias.PerformLayout();
             GrpAssemblyInfo.ResumeLayout(false);
             GrpAssemblyInfo.PerformLayout();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)GrdTest).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -514,15 +419,7 @@
         private TextBox TxtApplication;
         private TextBox TxtCompany;
         private Button BtnSave;
-        private GroupBox groupBox1;
-        private RadioButton RdoThree;
-        private RadioButton RdoTwo;
-        private RadioButton RdoOne;
-        private RadioButton RdoZero;
-        private ComboBox CmbZero;
-        private ComboBox CmbSomeString;
         private Button BtnScript;
-        private EtlaToolbelt.Forms.List2List L2lTest;
-        private DataGridView GrdTest;
+        private CheckBox ChkPostgres;
     }
 }
