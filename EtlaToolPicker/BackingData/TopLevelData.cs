@@ -29,6 +29,8 @@ public class TopLevelData : IBackingData
 
     public bool HasPostgres { get; set; } = false;
 
+    public UtilitiesData UtilitiesData { get; set; } = new();
+
 
     //================================================================================
     // Test stuff

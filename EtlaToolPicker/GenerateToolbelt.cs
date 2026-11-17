@@ -54,6 +54,11 @@ internal static class GenerateToolbelt
             if (!GenerateAssemblyDefinitions()) { return false; }
         }
 
+
+        if (data.UtilitiesData.Plurals && !ProcessFile("Plurals.cs", "StringUtilities")) { return false; }
+        if (data.UtilitiesData.PostgresNames && !ProcessFile("PostgresNames.cs", "StringUtilities")) { return false; }
+
+
         return true;
     }
 
@@ -140,16 +145,32 @@ internal static class GenerateToolbelt
 
             Scr($"namespace {_TargetNamespace}.Properties;");
             Scr();
+            Scr("/// <summary>This class is used to simplify the construction of my generated AssemblyInfo class</summary>");
             Scr("public static class AssemblyDefinitions");
             Scr("{", 1);
+            Scr("/// <summary>Major version will appear in the FileVersion and ProductVersion attributes of the assembly visible in the FileExplorer</summary>");
             Scr("public const string MajorVersion = \"0\";");
+            Scr();
+            Scr("/// <summary>Minor version will appear in the FileVersion and ProductVersion attributes of the assembly visible in the FileExplorer</summary>");
             Scr("public const string MinorVersion = \"1\";");
+            Scr();
+            Scr("/// <summary>Version will appear in the FileVersion and ProductVersion attributes of the assembly visible in the FileExplorer</summary>");
             Scr("public const string Version = MajorVersion + \".\" + MinorVersion;");
             Scr();
+            Scr();
+            Scr("/// <summary>ApplicationName will be used as a directory name in part of the path for EtlaToolbelt logging and persistence</summary>\r\n");
             Scr($"public const string ApplicationName = \"{_BackingData.ApplicationName}\";");
+            Scr();
+            Scr("/// <summary>Start year is used in the copyright property</summary>");
             Scr($"public const string StartYear = \"2019\";");
+            Scr();
+            Scr("/// <summary>Company will be used as a directory name in part of the path for EtlaToolbelt logging and persistence</summary>\r\n");
             Scr($"public const string Company = \"{_BackingData.CompanyName}\";");
+            Scr();
+            Scr("/// <summary>CompanyFullName will be used in the copyright property</summary>");
             Scr($"public const string CompanyFullName = \"{_BackingData.CompanyName}\";");
+            Scr();
+            Scr("/// <summary>The copyright property</summary>");
             Scr("public const string Copyright = Company + \" \" + StartYear + \"-\";");
             Scr("}", -1);
 

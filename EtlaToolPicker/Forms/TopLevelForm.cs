@@ -1,5 +1,7 @@
 using EtlaToolPicker.BackingData;
 using EtlaToolPicker.EtlaToolbelt.Forms;
+using EtlaToolPicker.EtlaToolbelt.Wizards;
+using EtlaToolPicker.Forms;
 
 namespace EtlaToolPicker
 {
@@ -77,5 +79,14 @@ namespace EtlaToolPicker
 
         }
 
+        private void BtnUtilities_Click(object sender, EventArgs e)
+        {
+            using (var form = new UtilitiesForm(Data.UtilitiesData))
+            {
+                var result = BaseWizard.ShowSingleton(form, this);
+                if (result == FormResult.EXIT) { DialogResult = (DialogResult)result; }
+            }
+
+        }
     }
 }

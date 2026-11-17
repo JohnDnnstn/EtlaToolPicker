@@ -58,6 +58,7 @@
             BtnSave = new Button();
             BtnScript = new Button();
             ChkPostgres = new CheckBox();
+            BtnUtilities = new Button();
             GrpFascias.SuspendLayout();
             GrpAssemblyInfo.SuspendLayout();
             SuspendLayout();
@@ -355,11 +356,22 @@
             ChkPostgres.Text = "Postgres Connections";
             ChkPostgres.UseVisualStyleBackColor = true;
             // 
+            // BtnUtilities
+            // 
+            BtnUtilities.Location = new Point(359, 274);
+            BtnUtilities.Name = "BtnUtilities";
+            BtnUtilities.Size = new Size(75, 23);
+            BtnUtilities.TabIndex = 25;
+            BtnUtilities.Text = "Utilities";
+            BtnUtilities.UseVisualStyleBackColor = true;
+            BtnUtilities.Click += BtnUtilities_Click;
+            // 
             // TopLevelForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(829, 450);
+            Controls.Add(BtnUtilities);
             Controls.Add(ChkPostgres);
             Controls.Add(BtnScript);
             Controls.Add(BtnSave);
@@ -421,5 +433,6 @@
         private Button BtnSave;
         private Button BtnScript;
         private CheckBox ChkPostgres;
+        private Button BtnUtilities;
     }
 }

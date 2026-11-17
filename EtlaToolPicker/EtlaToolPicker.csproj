@@ -108,6 +108,12 @@
     <Compile Update="EtlaToolbelt\Script.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Update="EtlaToolbelt\StringUtilities\Plurals.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Update="EtlaToolbelt\StringUtilities\PostgresNames.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Update="EtlaToolbelt\WizardForms\BaseWizardForm.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
